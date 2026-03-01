@@ -1,0 +1,28 @@
+20:04:29 **** Incremental Build of configuration Debug for project CHOE ****
+make -j4 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F100xB -DDEBUG -c -I../Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+../Src/main.c: In function 'main':
+../Src/main.c:104:33: warning: pointer targets in passing argument 2 of 'HAL_UART_Receive' differ in signedness [-Wpointer-sign]
+   res=HAL_UART_Receive(&huart3, buffer, 1, 100);
+                                 ^~~~~~
+In file included from ../Inc/stm32f1xx_hal_conf.h:319:0,
+                 from ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:46,
+                 from ../Inc/main.h:31,
+                 from ../Src/main.c:22:
+../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:636:19: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'char *'
+ HAL_StatusTypeDef HAL_UART_Receive(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+                   ^~~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "CHOE.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\mhn\Desktop\GUI\Program\CHOE\STM32F100C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="CHOE.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: CHOE.elf
+ 
+arm-none-eabi-objdump -h -S  CHOE.elf  > "CHOE.list"
+arm-none-eabi-size   CHOE.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7312	     20	   1636	   8968	   2308	CHOE.elf
+Finished building: default.size.stdout
+ 
+Finished building: CHOE.list
+ 
+
+20:04:33 Build Finished. 0 errors, 1 warnings. (took 3s.504ms)
+
